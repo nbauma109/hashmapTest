@@ -33,7 +33,7 @@ public class FastUtilRef2ObjectMapTest implements ITestSet
         @Override
         public void setup(final int[] keys, final float fillFactor, final int oneFailureOutOf ) {
             super.setup( keys, fillFactor, oneFailureOutOf );
-            m_map = new Reference2ObjectOpenHashMap<>( keys.length, fillFactor );
+            m_map = new Reference2ObjectOpenHashMap<Integer, Integer>( keys.length, fillFactor );
             for (Integer key : m_keys)
                 m_map.put(key % oneFailureOutOf == 0 ? key + 1 : key, key);
         }
@@ -50,7 +50,7 @@ public class FastUtilRef2ObjectMapTest implements ITestSet
     private static class FastUtilRef2ObjPutTest extends AbstractObjKeyPutIdentityTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> m_map = new Reference2ObjectOpenHashMap<>( m_keys.length, m_fillFactor );
+            final Map<Integer, Integer> m_map = new Reference2ObjectOpenHashMap<Integer, Integer>( m_keys.length, m_fillFactor );
             for ( int i = 0; i < m_keys.length; ++i )
                 m_map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys.length; ++i ) //same key set is used for identity maps
@@ -62,7 +62,7 @@ public class FastUtilRef2ObjectMapTest implements ITestSet
     private static class FastUtilRef2ObjRemoveTest extends AbstractObjKeyPutIdentityTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> m_map = new Reference2ObjectOpenHashMap<>( m_keys.length / 2 + 1, m_fillFactor );
+            final Map<Integer, Integer> m_map = new Reference2ObjectOpenHashMap<Integer, Integer>( m_keys.length / 2 + 1, m_fillFactor );
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {

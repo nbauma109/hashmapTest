@@ -54,55 +54,40 @@ public class MapTestRunner {
             IntIntMap2Test.class,
             IntIntMap3Test.class,
             IntIntMap4Test.class,
-            IntIntMap4aTest.class,
+            IntIntMap4aTest.class
     };
 
     private static final Class[] TESTS_PRIMITIVE = {
             FastUtilMapTest.class,
-            GsMutableMapTest.class,
-            KolobokeMutableMapTest.class, //+
-            HppcMapTest.class,
-            TroveMapTest.class, //+
+            KolobokeMutableMapTest.class
     };
     private static final Class[] TESTS_WRAPPER = {
             FastUtilObjMapTest.class,
             KolobokeMutableObjTest.class, //+
             KolobokeNotNullKeyObjTest.class,
             KolobokeHashCodeMixingObjTest.class,
-            HppcObjMapTest.class,
-            GsObjMapTest.class,
             JdkMapTest.class,  //+
             JdkMapTestDifferentCapacity.class,  //+
-            TroveObjMapTest.class,   //+
             ObjObjMapTest.class   //
     };
     private static final Class[] TESTS_PRIMITIVE_WRAPPER = {
             FastUtilIntObjectMapTest.class,
-            GsIntObjectMapTest.class,
-            KolobokeIntObjectMapTest.class,   //+
-            HppcIntObjectMapTest.class,
-            TroveIntObjectMapTest.class,   //+
+            KolobokeIntObjectMapTest.class
     };
     private static final Class[] TESTS_WRAPPER_PRIMITIVE = {
             FastUtilObjectIntMapTest.class,
-            GsObjectIntMapTest.class,
-            KolobokeObjectIntMapTest.class,   //+
-            HppcObjectIntMapTest.class,
-            TroveObjectIntMapTest.class,   //+
+            KolobokeObjectIntMapTest.class
     };
 
     private static final Class[] TESTS_IDENTITY = {
             FastUtilRef2ObjectMapTest.class,
-            GsIdentityMapTest.class,
             KolobokeIdentityMapTest.class,
-            HppcIdentityMapTest.class,
-            JDKIdentityMapTest.class,
-            TroveIdentityMapTest.class,
+            JDKIdentityMapTest.class
     };
 
     public static void main(String[] args) throws RunnerException, InstantiationException, IllegalAccessException
     {
-        final LinkedHashMap<String, String> res = new LinkedHashMap<>(3);
+        final LinkedHashMap<String, String> res = new LinkedHashMap<String, String>(3);
         res.put( "get", runTestSet( "get" ) );
         res.put( "put", runTestSet( "put" ) );
         res.put( "remove", runTestSet( "remove" ) );
@@ -117,7 +102,7 @@ public class MapTestRunner {
 
     private static String runTestSet(final String testSetName) throws RunnerException, InstantiationException, IllegalAccessException
     {
-        final List<Class> tests = new ArrayList<>();
+        final List<Class> tests = new ArrayList<Class>();
         tests.addAll( Arrays.asList( TESTS_ARTICLE ) );
         tests.addAll( Arrays.asList( TESTS_PRIMITIVE ) );
         tests.addAll( Arrays.asList( TESTS_WRAPPER ) );
@@ -126,7 +111,7 @@ public class MapTestRunner {
         tests.addAll( Arrays.asList( TESTS_IDENTITY ) );
 
         //first level: test class, second level - map size
-        final Map<String, Map<Integer, String>> results = new HashMap<>();
+        final Map<String, Map<Integer, String>> results = new HashMap<String, Map<Integer, String>>();
 
         if ( BILLION_TEST )
         { //JMH does not feel well on these sizes
@@ -159,13 +144,13 @@ public class MapTestRunner {
                     System.out.println( testClass.getCanonicalName() + " (" + mapSize + ") = " + rr.getAggregatedResult().getPrimaryResult().getScore() );
                     Map<Integer, String> forClass = results.get( testClass.getCanonicalName() );
                     if ( forClass == null )
-                        results.put( testClass.getCanonicalName(), forClass = new HashMap<>( 4 ) );
+                        results.put( testClass.getCanonicalName(), forClass = new HashMap<Integer, String>( 4 ) );
                     forClass.put(mapSize, Integer.toString((int) rr.getAggregatedResult().getPrimaryResult().getScore()) );
                 }
                 if ( res.isEmpty() ) {
                     Map<Integer, String> forClass = results.get( testClass.getCanonicalName() );
                     if ( forClass == null )
-                        results.put( testClass.getCanonicalName(), forClass = new HashMap<>( 4 ) );
+                        results.put( testClass.getCanonicalName(), forClass = new HashMap<Integer, String>( 4 ) );
                     forClass.put(mapSize, "-1");
                 }
             }
@@ -248,19 +233,20 @@ public class MapTestRunner {
     {
         try {
             final ITestSet testSet = (ITestSet) Class.forName( m_className ).newInstance();
-            switch ( m_testType )
+            TestType testType = TestType.valueOf(m_testType);
+            switch ( testType )
             {
-                case "get":
+                case get:
                     m_impl = testSet.getTest();
                     break;
-                case "put":
+                case put:
                     m_impl = testSet.putTest();
                     break;
-                case "remove":
+                case remove:
                     m_impl = testSet.removeTest();
                     break;
             }
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

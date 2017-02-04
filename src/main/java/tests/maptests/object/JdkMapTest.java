@@ -30,7 +30,7 @@ public class JdkMapTest implements ITestSet
 
     protected <T, V> Map<T, V> makeMap( final int size, final float fillFactor )
     {
-        return new HashMap<>( size, fillFactor );
+        return new HashMap<T, V>( size, fillFactor );
     }
 
     //classes are non static due to a subclass presence

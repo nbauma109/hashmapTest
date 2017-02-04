@@ -44,7 +44,7 @@ public class IntIntMap3 implements IntIntMap
         m_threshold = (int) (capacity * fillFactor);
     }
 
-    public int get( final int key )
+    public synchronized int get( final int key )
     {
         if ( key == FREE_KEY)
             return m_hasFreeKey ? m_freeValue : NO_VALUE;
@@ -53,7 +53,7 @@ public class IntIntMap3 implements IntIntMap
         return idx != -1 ? m_values[ idx ] : NO_VALUE;
     }
 
-    public int put( final int key, final int value )
+    public synchronized int put( final int key, final int value )
     {
         if ( key == FREE_KEY )
         {
@@ -88,7 +88,7 @@ public class IntIntMap3 implements IntIntMap
         return prev;
     }
 
-    public int remove( final int key )
+    public synchronized int remove( final int key )
     {
         if ( key == FREE_KEY )
         {
@@ -112,7 +112,7 @@ public class IntIntMap3 implements IntIntMap
         return res;
     }
 
-    public int size()
+    public synchronized int size()
     {
         return m_size;
     }

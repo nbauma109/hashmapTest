@@ -33,7 +33,7 @@ public class JDKIdentityMapTest implements ITestSet
         @Override
         public void setup(final int[] keys, final float fillFactor, final int oneFailureOutOf ) {
             super.setup( keys, fillFactor, oneFailureOutOf );
-            m_map = new IdentityHashMap<>( keys.length );
+            m_map = new IdentityHashMap<Integer, Integer>( keys.length );
             for (Integer key : m_keys)
                 m_map.put(key % oneFailureOutOf == 0 ? key + 1 : key, key);
         }
@@ -50,7 +50,7 @@ public class JDKIdentityMapTest implements ITestSet
     private static class JdkIdentityMapPutTest extends AbstractObjKeyPutIdentityTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> map = new IdentityHashMap<>( m_keys.length );
+            final Map<Integer, Integer> map = new IdentityHashMap<Integer, Integer>( m_keys.length );
             for ( int i = 0; i < m_keys.length; ++i )
                 map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys.length; ++i ) //same set is used for identity tests
@@ -62,7 +62,7 @@ public class JDKIdentityMapTest implements ITestSet
     private static class JdkIdentityMapRemoveTest extends AbstractObjKeyPutIdentityTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> m_map = new IdentityHashMap<>( m_keys.length / 2 + 1 );
+            final Map<Integer, Integer> m_map = new IdentityHashMap<Integer, Integer>( m_keys.length / 2 + 1 );
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {

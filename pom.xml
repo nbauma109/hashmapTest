@@ -55,46 +55,20 @@ questions.
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil</artifactId>
-            <version>7.0.10</version>
-        </dependency>
-
-        <!-- Trove -->
-        <dependency>
-            <groupId>net.sf.trove4j</groupId>
-            <artifactId>trove4j</artifactId>
-            <version>3.0.3</version>
+            <version>6.6.5</version>
         </dependency>
 
         <!-- Koloboke -->
         <dependency>
             <groupId>net.openhft</groupId>
-            <artifactId>koloboke-api-jdk8</artifactId>
+            <artifactId>koloboke-api-jdk6-7</artifactId>
             <version>0.6.8</version>
         </dependency>
         <dependency>
             <groupId>net.openhft</groupId>
-            <artifactId>koloboke-impl-jdk8</artifactId>
+            <artifactId>koloboke-impl-jdk6-7</artifactId>
             <version>0.6.8</version>
             <scope>runtime</scope>
-        </dependency>
-
-        <!-- Goldman Sachs collections -->
-        <dependency>
-        	<groupId>com.goldmansachs</groupId>
-        	<artifactId>gs-collections-api</artifactId>
-        	<version>7.0.1</version>
-        </dependency>
-        <dependency>
-        	<groupId>com.goldmansachs</groupId>
-        	<artifactId>gs-collections</artifactId>
-        	<version>7.0.1</version>
-        </dependency>
-
-        <!-- HPPC -->
-        <dependency>
-            <groupId>com.carrotsearch</groupId>
-            <artifactId>hppc</artifactId>
-            <version>0.7.1</version>
         </dependency>
 
         <!-- JUnit -->
@@ -110,8 +84,8 @@ questions.
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jmh.version>1.11.3</jmh.version>
-        <javac.target>1.8</javac.target>
+        <jmh.version>0.9.8</jmh.version>
+        <javac.target>1.6</javac.target>
         <uberjar.name>benchmarks</uberjar.name>
     </properties>
 
@@ -120,7 +94,7 @@ questions.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.6.0</version>
                 <configuration>
                     <compilerVersion>${javac.target}</compilerVersion>
                     <source>${javac.target}</source>

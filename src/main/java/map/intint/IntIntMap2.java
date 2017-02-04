@@ -41,13 +41,13 @@ public class IntIntMap2 implements IntIntMap
         m_threshold = (int) (capacity * fillFactor);
     }
 
-    public int get( final int key )
+    public synchronized int get( final int key )
     {
         final int idx = getReadIndex( key );
         return idx != -1 ? m_values[ idx ] : NO_VALUE;
     }
 
-    public int put( final int key, final int value )
+    public synchronized int put( final int key, final int value )
     {
         int idx = getPutIndex( key );
         if ( idx < 0 )
@@ -73,7 +73,7 @@ public class IntIntMap2 implements IntIntMap
         return prev;
     }
 
-    public int remove( final int key )
+    public synchronized int remove( final int key )
     {
         int idx = getReadIndex( key );
         if ( idx == -1 )
@@ -84,7 +84,7 @@ public class IntIntMap2 implements IntIntMap
         return res;
     }
 
-    public int size()
+    public synchronized int size()
     {
         return m_size;
     }

@@ -34,7 +34,7 @@ public class FastUtilObjMapTest implements ITestSet
         @Override
         public void setup(final int[] keys, final float fillFactor, final int oneFailureOutOf ) {
             super.setup( keys, fillFactor, oneFailureOutOf );
-            m_map = new Object2ObjectOpenHashMap<>( m_keys.length, fillFactor );
+            m_map = new Object2ObjectOpenHashMap<Integer, Integer>( m_keys.length, fillFactor );
             for (Integer key : m_keys) m_map.put(new Integer( key % oneFailureOutOf == 0 ? key + 1 : key ), key);
         }
 
@@ -50,7 +50,7 @@ public class FastUtilObjMapTest implements ITestSet
     private static class FastUtilObjPutTest extends AbstractObjKeyPutTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> m_map = new Object2ObjectOpenHashMap<>( m_keys.length, m_fillFactor );
+            final Map<Integer, Integer> m_map = new Object2ObjectOpenHashMap<Integer, Integer>( m_keys.length, m_fillFactor );
             for ( int i = 0; i < m_keys.length; ++i )
                 m_map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys2.length; ++i )
@@ -62,7 +62,7 @@ public class FastUtilObjMapTest implements ITestSet
     private static class FastUtilObjRemoveTest extends AbstractObjKeyPutTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> m_map = new Object2ObjectOpenHashMap<>( m_keys.length / 2 + 1, m_fillFactor );
+            final Map<Integer, Integer> m_map = new Object2ObjectOpenHashMap<Integer, Integer>( m_keys.length / 2 + 1, m_fillFactor );
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {

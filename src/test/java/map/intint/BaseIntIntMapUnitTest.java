@@ -6,12 +6,13 @@ import tests.maptests.IMapTest;
 import tests.maptests.article_examples.BaseIntIntMapTest;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class BaseIntIntMapUnitTest extends TestCase {
 
     private final static float[] FILL_FACTORS = { 0.25f, 0.5f, 0.75f, 0.9f, 0.99f };
+	private final static Random random = new Random();
 
     abstract protected IntIntMap makeMap( final int size, final float fillFactor );
 
@@ -64,10 +65,10 @@ public abstract class BaseIntIntMapUnitTest extends TestCase {
     private void testPutRandom( final float fillFactor )
     {
         final int SIZE = 100 * 1000;
-        final Set<Integer> set = new HashSet<>( SIZE );
+        final Set<Integer> set = new HashSet<Integer>( SIZE );
         final int[] vals = new int[ SIZE ];
         while ( set.size() < SIZE )
-            set.add( ThreadLocalRandom.current().nextInt() );
+            set.add( random.nextInt() );
         int i = 0;
         for ( final Integer v : set )
             vals[ i++ ] = v;

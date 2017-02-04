@@ -30,7 +30,7 @@ public class FastUtilIntObjectMapTest implements ITestSet
         @Override
         public void setup(int[] keys, float fillFactor, int oneFailOutOf) {
             super.setup(keys, fillFactor, oneFailOutOf );
-            m_map = new Int2ObjectOpenHashMap<>( keys.length, fillFactor );
+            m_map = new Int2ObjectOpenHashMap<Integer>( keys.length, fillFactor );
             for ( int key : keys ) m_map.put( key % oneFailOutOf == 0 ? key + 1 : key, Integer.valueOf(key) );
         }
 
@@ -46,7 +46,7 @@ public class FastUtilIntObjectMapTest implements ITestSet
     private static class FastUtilIntObjectPutTest extends AbstractPrimObjectPutTest {
         @Override
         public int test() {
-            final Int2ObjectOpenHashMap<Integer> m_map = new Int2ObjectOpenHashMap<>( m_keys.length, m_fillFactor );
+            final Int2ObjectOpenHashMap<Integer> m_map = new Int2ObjectOpenHashMap<Integer>( m_keys.length, m_fillFactor );
             for ( int i = 0; i < m_keys.length; ++i )
                 m_map.put( m_keys[ i ], null );
             for ( int i = 0; i < m_keys.length; ++i )
@@ -58,7 +58,7 @@ public class FastUtilIntObjectMapTest implements ITestSet
     private static class FastUtilIntObjectRemoveTest extends AbstractPrimObjectPutTest {
         @Override
         public int test() {
-            final Int2ObjectOpenHashMap<Integer> m_map = new Int2ObjectOpenHashMap<>( m_keys.length / 2 + 1, m_fillFactor );
+            final Int2ObjectOpenHashMap<Integer> m_map = new Int2ObjectOpenHashMap<Integer>( m_keys.length / 2 + 1, m_fillFactor );
             final Integer value = 1;
             int add = 0, remove = 0;
             while ( add < m_keys.length )

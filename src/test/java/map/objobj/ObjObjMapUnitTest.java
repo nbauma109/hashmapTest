@@ -6,13 +6,16 @@ import tests.maptests.IMapTest;
 import tests.maptests.article_examples.ObjObjMapTest;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ObjObjMapUnitTest extends TestCase {
+	
+	private static final Random random = new Random();
+	
     private ObjObjMap<Integer, Integer> makeMap( final int size, final float fillFactor )
     {
-        return new ObjObjMap<>( size, fillFactor );
+        return new ObjObjMap<Integer, Integer>( size, fillFactor );
     }
 
     public void testPut()
@@ -46,10 +49,10 @@ public class ObjObjMapUnitTest extends TestCase {
     public void testPutRandom()
     {
         final int SIZE = 100 * 1000;
-        final Set<Integer> set = new HashSet<>( SIZE );
+        final Set<Integer> set = new HashSet<Integer>( SIZE );
         final int[] vals = new int[ SIZE ];
         while ( set.size() < SIZE )
-            set.add( ThreadLocalRandom.current().nextInt() );
+            set.add( random.nextInt() );
         int i = 0;
         for ( final Integer v : set )
             vals[ i++ ] = v;

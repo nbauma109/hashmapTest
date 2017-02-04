@@ -10,6 +10,6 @@ import java.util.Map;
 public class JdkMapTestDifferentCapacity extends JdkMapTest {
     protected <T, V> Map<T, V> makeMap( final int size, final float fillFactor )
     {
-        return new HashMap<>( (int) (size / fillFactor + 1), fillFactor );
+        return new HashMap<T, V>( (int) (size / fillFactor + 1), fillFactor );
     }
 }
